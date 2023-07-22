@@ -1,0 +1,23 @@
+.action-container {
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mat-form-field {
+  font-size: 1.2rem;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-cell {
+  font-size: 1.2rem;
+}
+
+th.mat-header-cell,
+td {
+  text-align: center;
+}
