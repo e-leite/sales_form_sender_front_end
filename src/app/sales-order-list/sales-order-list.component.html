@@ -11,7 +11,9 @@
       </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button color="primary">Adicionar</button>
+    <button mat-raised-button color="primary" [routerLink]="['/sales/new']">
+      Adicionar
+    </button>
   </div>
   <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="id">
