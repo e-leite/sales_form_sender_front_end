@@ -1,0 +1,169 @@
+<div class="form-container">
+  <form [formGroup]="form" class="example-form mat-elevation-z3">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Criar novo pedido</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- start fields -->
+
+        <mat-form-field
+          appearance="outline"
+          style="width: 24%; margin-right: 3%"
+        >
+          <mat-label>Cod. cliente</mat-label>
+          <input matInput formControlName="customerId" />
+          <button mat-icon-button matSuffix (click)="callSearchCustomer()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" style="width: 73%">
+          <mat-label>Nome do cliente</mat-label>
+          <input matInput formControlName="customerName" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Cidade</mat-label>
+          <input matInput formControlName="customercity" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Estado</mat-label>
+          <input matInput formControlName="customerState" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Prazo de pagamento</mat-label>
+          <mat-select formControlName="paymentTerm">
+            <mat-option *ngFor="let term of paymentTerms" [value]="term">
+              {{ term }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Local de faturamento</mat-label>
+          <mat-select formControlName="shipBase">
+            <mat-option
+              *ngFor="let status of salesOrderStatus"
+              [value]="status"
+            >
+              {{ status }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Data de faturamento</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="invoiceDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Tipo de frete</mat-label>
+          <mat-select
+            formControlName="shipmentType"
+            (valueChange)="onShipmentTypeChange($event)"
+          >
+            <mat-option
+              *ngFor="let shipmentType of shipmentTypes"
+              [value]="shipmentType.type"
+            >
+              {{ shipmentType.type }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+          *ngIf="selectedshipmentTypes == 'Por conta da empresa'"
+        >
+          <mat-label>Endereço tem estrada de chão</mat-label>
+          <mat-select
+            formControlName="addressHasUpavedRoad"
+            (valueChange)="onUnpavedRoadSelectedOptionChange($event)"
+          >
+            <mat-option
+              *ngFor="let hasUpavedRoadOption of hasUpavedRoadOptions"
+              [value]="hasUpavedRoadOption"
+            >
+              {{ hasUpavedRoadOption }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+          *ngIf="
+            selectedshipmentTypes == 'Por conta da empresa' &&
+            unpavedRoadSelectedOption == 'Sim'
+          "
+        >
+          <mat-label>Km de estrada de chão</mat-label>
+          <input type="number" matInput formControlName="unpavedRoadSize" />
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+          *ngIf="selectedshipmentTypes == 'Por conta do cliente'"
+        >
+          <mat-label>Nome da transpotadora</mat-label>
+          <input type="text" matInput formControlName="shippingCompanyName" />
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+          *ngIf="selectedshipmentTypes == 'Por conta do cliente'"
+        >
+          <mat-label>Nome do contato na transportadora</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="shippingCompanyContactName"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+          *ngIf="selectedshipmentTypes == 'Por conta do cliente'"
+        >
+          <mat-label>Telefone da transportadora</mat-label>
+          <input type="tel" matInput formControlName="shippingCompanyPhone" />
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          class="full-width"
+          *ngIf="selectedshipmentTypes == 'Por conta do cliente'"
+        >
+          <mat-label>E-mail da transportadora</mat-label>
+          <input type="email" matInput formControlName="shippingCompanyEmail" />
+        </mat-form-field>
+
+        <!-- end fields -->
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary" (click)="onSave()">
+          Salvar
+        </button>
+        <button mat-raised-button color="warn" (click)="onCancel()">
+          Cancelar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
