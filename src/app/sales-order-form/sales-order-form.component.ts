@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomerListComponent } from '../customer-list/customer-list.component';
 
 @Component({
   selector: 'app-sales-order-form',
@@ -8,7 +9,7 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./sales-order-form.component.scss'],
 })
 export class SalesOrderFormComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {}
 
   salesOrderStatus: string[] = ['Rascunho', 'Enviado'];
   paymentTerms: string[] = ['01', '30/60', '30/60/90'];
@@ -46,6 +47,10 @@ export class SalesOrderFormComponent implements OnInit {
       shippingCompanyPhone: [null],
       shippingCompanyEmail: [null],
     });
+
+    this.form.controls['customerName'].disable();
+    this.form.controls['customercity'].disable();
+    this.form.controls['customerState'].disable();
   }
 
   onSave(): void {
@@ -85,5 +90,19 @@ export class SalesOrderFormComponent implements OnInit {
     fieldsToReset.forEach((field) => this.form.patchValue({ [field]: null }));
   }
 
-  callSearchCustomer(): void {}
+  callSearchCustomer(): void {
+    this.dialog
+      .open(CustomerListComponent, { width: '500px' })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.form.patchValue({
+            customerId: result.id,
+            customerName: result.name,
+            customercity: result.city,
+            customerState: result.state,
+          });
+        }
+      });
+  }
 }
