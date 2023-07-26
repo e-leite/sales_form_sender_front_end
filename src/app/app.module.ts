@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { SalesOrderFormComponent } from './sales-order-form/sales-order-form.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CustomerListComponent } from './customer-list/customer-list.component';
+import { ProductsFormComponent } from './products-form/products-form.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
     SalesOrderListComponent,
     SalesOrderFormComponent,
     CustomerListComponent,
+    ProductsFormComponent,
   ],
   imports: [
     BrowserModule,
