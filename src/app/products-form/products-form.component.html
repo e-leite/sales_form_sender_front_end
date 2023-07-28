@@ -1,1 +1,72 @@
-<p>products-form works!</p>
+<mat-card>
+  <mat-card-title> Pedido 1 - Cliente 1 </mat-card-title>
+  <!-- <mat-card-content class="main-container"> -->
+  <mat-card-content>
+    <!---->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nome do produto</mat-label>
+      <input matInput placeholder="Digite o nome do produto para buscar." />
+    </mat-form-field>
+
+    <!--Start Products List-->
+    <div class="product-list-container">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="Nome">
+          <td mat-cell *matCellDef="let product">
+            {{ product.name }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Tipo">
+          <td mat-cell *matCellDef="let product">
+            {{ product.type }}
+          </td>
+        </ng-container>
+
+        <tr
+          mat-row
+          [ngClass]="{ selectedRow: productId == row.id }"
+          (click)="onSelectProduct(row)"
+          *matRowDef="let row; columns: displayedColumns"
+        ></tr>
+      </table>
+    </div>
+    <form [formGroup]="form" style="margin-top: 30px">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nome do produto</mat-label>
+        <input matInput disabled="true" [value]="productName" />
+      </mat-form-field>
+
+      <div class="product-price-info">
+        <mat-form-field appearance="outline">
+          <mat-label>Quantidade</mat-label>
+          <input
+            matInput
+            type="number"
+            (keyup)="onInputQuantity($event)"
+            formControlName="quantity"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Preço unitário</mat-label>
+          <input matInput disabled="true" [value]="productPrice" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Preço total</mat-label>
+          <input matInput formControlName="totalPrice" />
+        </mat-form-field>
+      </div>
+    </form>
+    <!--End Products List-->
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button (click)="onSave()" color="primary">Salvar</button>
+    <button mat-raised-button (click)="onCancel()" color="warn">
+      Cancelar
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<div class="main-container"></div>

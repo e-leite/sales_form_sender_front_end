@@ -1,0 +1,47 @@
+mat-card {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70vw;
+  height: 80vh;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+table {
+  width: 100%;
+}
+
+.product-list-container {
+  width: 100%;
+  height: 200px;
+  overflow: auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-cell {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.product-price-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.product-price-info mat-form-field {
+  width: 30%;
+}
+
+.selectedRow {
+  background-color: yellow;
+}

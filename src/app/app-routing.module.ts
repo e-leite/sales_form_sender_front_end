@@ -12,7 +12,7 @@ const routes: Routes = [];
     RouterModule.forRoot([
       { path: 'sales', component: SalesOrderListComponent },
       { path: 'sales/new', component: SalesOrderFormComponent },
-      { path: 'sales/products/add', component: ProductsFormComponent },
+      { path: 'sales/:id/products/add', component: ProductsFormComponent },
     ]),
   ],
   exports: [RouterModule],

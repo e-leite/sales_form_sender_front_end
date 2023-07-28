@@ -73,7 +73,10 @@
     <ng-container matColumnDef="action">
       <th mat-header-cell *matHeaderCellDef>Ação</th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button [routerLink]="['/sales/products/add']">
+        <button
+          mat-icon-button
+          [routerLink]="['/sales', element.id, 'products', 'add']"
+        >
           <mat-icon color="primary">add_shopping_cart</mat-icon>
         </button>
         <button mat-icon-button>
