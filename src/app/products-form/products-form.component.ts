@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { Product } from '../models/Product';
 
 @Component({
   selector: 'app-products-form',
@@ -98,14 +99,4 @@ export class ProductsFormComponent implements OnInit {
     this.productName = null;
     this.productPrice = null;
   }
-}
-
-interface SalesItem {
-  salesOrderId: number;
-  productId: number;
-  productName: string;
-  productType: string;
-  quantity: number;
-  productPrice: number;
-  totalPrice: number;
 }
