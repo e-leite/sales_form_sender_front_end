@@ -88,7 +88,6 @@ export class ProductsFormComponent implements OnInit {
   }
 
   onSave(): void {
-    console.log(this.form.value);
     this.form.reset();
     this.productName = null;
     this.productPrice = null;
@@ -101,9 +100,12 @@ export class ProductsFormComponent implements OnInit {
   }
 }
 
-interface Product {
-  id: number;
-  name: string;
-  type: string;
-  price: number;
+interface SalesItem {
+  salesOrderId: number;
+  productId: number;
+  productName: string;
+  productType: string;
+  quantity: number;
+  productPrice: number;
+  totalPrice: number;
 }
