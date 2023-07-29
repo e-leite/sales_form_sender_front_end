@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/Product';
 import { SALES_ITEM_DATA } from 'src/assets/SalesItens-mock';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-products-form',
@@ -30,12 +31,9 @@ export class ProductsFormComponent implements OnInit {
   productPrice: number | null = null;
   totalPrice: number | null = null;
 
+  selectedProduct!: Product;
+
   ngOnInit(): void {
-    this.salesOrderId = parseFloat(this.route.snapshot.params['id']);
-
-    this.products = this.getProducts();
-    this.dataSource.data = this.products;
-
     this.form = this.formBuilder.group({
       salesOrderId: [null],
       productId: [null],
@@ -45,9 +43,17 @@ export class ProductsFormComponent implements OnInit {
       productPrice: [null],
       totalPrice: [null],
     });
+
+    this.salesOrderId = parseFloat(this.route.snapshot.params['id']);
+
+    this.getProducts().subscribe((products) => {
+      this.dataSource.data = products;
+      this.selectedProduct = products[0];
+      this.onSelectProduct(this.selectedProduct);
+    });
   }
 
-  getProducts(): Product[] {
+  getProducts(): Observable<Product[]> {
     const products: Product[] = [];
 
     for (let i = 1; i < 50; i++) {
@@ -58,10 +64,12 @@ export class ProductsFormComponent implements OnInit {
         price: parseFloat((Math.random() * 10).toFixed(2)),
       });
     }
-    return products;
+    return of(products);
   }
 
   onSelectProduct(product: Product): void {
+    this.selectedProduct = product;
+
     this.form.patchValue({
       salesOrderId: this.salesOrderId,
       productId: product.id,
@@ -94,14 +102,15 @@ export class ProductsFormComponent implements OnInit {
   onSave(): void {
     SALES_ITEM_DATA.push(this.form.value);
     this.form.reset();
-    this.productName = null;
-    this.productPrice = null;
+
+    this.onSelectProduct(this.selectedProduct);
+
     console.log(SALES_ITEM_DATA);
   }
 
   onCancel(): void {
     this.form.reset();
-    this.productName = null;
-    this.productPrice = null;
+
+    this.onSelectProduct(this.selectedProduct);
   }
 }
