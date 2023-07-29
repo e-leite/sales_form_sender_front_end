@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/Product';
+import { SALES_ITEM_DATA } from 'src/assets/SalesItens-mock';
 
 @Component({
   selector: 'app-products-form',
@@ -27,6 +28,7 @@ export class ProductsFormComponent implements OnInit {
 
   productName: string | null = '';
   productPrice: number | null = null;
+  totalPrice: number | null = null;
 
   ngOnInit(): void {
     this.salesOrderId = parseFloat(this.route.snapshot.params['id']);
@@ -79,6 +81,7 @@ export class ProductsFormComponent implements OnInit {
 
   calculateTotalPrice(quantity: number, price: number): void {
     this.form.controls['totalPrice'].setValue(price * quantity);
+    this.totalPrice = price * quantity;
   }
 
   onInputQuantity(event: Event): void {
@@ -89,9 +92,11 @@ export class ProductsFormComponent implements OnInit {
   }
 
   onSave(): void {
+    SALES_ITEM_DATA.push(this.form.value);
     this.form.reset();
     this.productName = null;
     this.productPrice = null;
+    console.log(SALES_ITEM_DATA);
   }
 
   onCancel(): void {
