@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/Product';
 import { SALES_ITEM_DATA } from 'src/assets/SalesItens-mock';
-import { Observable, of } from 'rxjs';
+import { ProductsService } from '../shared/products.service';
 
 @Component({
   selector: 'app-products-form',
@@ -14,7 +14,8 @@ import { Observable, of } from 'rxjs';
 export class ProductsFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private productsService: ProductsService
   ) {}
 
   products: Product[] = [];
@@ -46,25 +47,11 @@ export class ProductsFormComponent implements OnInit {
 
     this.salesOrderId = parseFloat(this.route.snapshot.params['id']);
 
-    this.getProducts().subscribe((products) => {
+    this.productsService.get().subscribe((products) => {
       this.dataSource.data = products;
       this.selectedProduct = products[0];
       this.onSelectProduct(this.selectedProduct);
     });
-  }
-
-  getProducts(): Observable<Product[]> {
-    const products: Product[] = [];
-
-    for (let i = 1; i < 50; i++) {
-      products.push({
-        id: i,
-        name: `Product ${i}`,
-        type: Math.floor(Math.random() * 10) % 2 == 0 ? 'Type 1' : 'Type 2',
-        price: parseFloat((Math.random() * 10).toFixed(2)),
-      });
-    }
-    return of(products);
   }
 
   onSelectProduct(product: Product): void {
