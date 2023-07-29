@@ -11,6 +11,7 @@ import { SalesOrderFormComponent } from './sales-order-form/sales-order-form.com
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { ProductsFormComponent } from './products-form/products-form.component';
+import { SalesOrderItemListComponent } from './sales-order-item-list/sales-order-item-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ProductsFormComponent } from './products-form/products-form.component';
     SalesOrderFormComponent,
     CustomerListComponent,
     ProductsFormComponent,
+    SalesOrderItemListComponent,
   ],
   imports: [
     BrowserModule,
