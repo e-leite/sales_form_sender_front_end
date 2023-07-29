@@ -79,7 +79,10 @@
         >
           <mat-icon color="primary">add_shopping_cart</mat-icon>
         </button>
-        <button mat-icon-button>
+        <button
+          mat-icon-button
+          [routerLink]="['/sales', element.id, 'products', 'list']"
+        >
           <mat-icon color="primary">shopping_bag</mat-icon>
         </button>
         <button mat-icon-button>
