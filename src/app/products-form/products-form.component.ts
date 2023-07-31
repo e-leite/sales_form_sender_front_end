@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/Product';
-import { SALES_ITEM_DATA } from 'src/assets/SalesItens-mock';
 import { ProductsService } from '../shared/products.service';
+import { SalesOrderItemListService } from '../sales-order-item-list/sales-order-item-list.service';
 
 @Component({
   selector: 'app-products-form',
@@ -15,7 +15,8 @@ export class ProductsFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private salesOrderItemListService: SalesOrderItemListService
   ) {}
 
   products: Product[] = [];
@@ -36,6 +37,7 @@ export class ProductsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
+      id: [null],
       salesOrderId: [null],
       productId: [null],
       productName: [null],
@@ -87,12 +89,10 @@ export class ProductsFormComponent implements OnInit {
   }
 
   onSave(): void {
-    SALES_ITEM_DATA.push(this.form.value);
+    this.salesOrderItemListService.save(this.form.value);
     this.form.reset();
 
     this.onSelectProduct(this.selectedProduct);
-
-    console.log(SALES_ITEM_DATA);
   }
 
   onCancel(): void {
