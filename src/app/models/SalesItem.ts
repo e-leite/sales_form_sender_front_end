@@ -1,4 +1,5 @@
 export interface SalesItem {
+  id: number;
   salesOrderId: number;
   productId: number;
   productName: string;
