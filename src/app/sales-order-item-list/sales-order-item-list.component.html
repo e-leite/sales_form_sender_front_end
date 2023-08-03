@@ -1,1 +1,102 @@
-<p>sales-order-item-list works!</p>
+<div>
+  <div class="action-container">
+    <span>Pedido {{ salesOrderId }} - xxxxxxx</span>
+
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/sales', salesOrderId, 'products', 'add']"
+    >
+      Adicionar
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="productId">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td class="td-display-none" mat-cell *matCellDef="let element">
+          {{ element.productId }}
+        </td>
+        <td class="td-hide" mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="productName">
+        <th mat-header-cell *matHeaderCellDef>Produto</th>
+        <td title="Nome do produto: " mat-cell *matCellDef="let element">
+          {{ element.productName }}
+        </td>
+        <td class="td-hide" mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="productType">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td title="Tipo do produto: " mat-cell *matCellDef="let element">
+          {{ element.productType }}
+        </td>
+        <td class="td-hide" mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+        <td
+          title="Quantidade: "
+          class="lft-align"
+          mat-cell
+          *matCellDef="let element"
+        >
+          <div class="value-container">
+            {{ element.quantity }}
+          </div>
+        </td>
+        <td class="td-hide" mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="productPrice">
+        <th mat-header-cell *matHeaderCellDef>Preço unitário</th>
+        <td
+          title="Preço unitário: "
+          class="lft-align"
+          mat-cell
+          *matCellDef="let element"
+        >
+          <div class="value-container">
+            {{ element.productPrice | currency }}
+          </div>
+        </td>
+        <td class="td-hide" mat-footer-cell *matFooterCellDef>Total</td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalPrice">
+        <th mat-header-cell *matHeaderCellDef>Total</th>
+        <td
+          title="Total: "
+          class="td-full-width lft-align"
+          mat-cell
+          *matCellDef="let element"
+        >
+          <div class="value-container">
+            {{ element.totalPrice | currency }}
+          </div>
+        </td>
+        <td mat-footer-cell *matFooterCellDef>
+          {{ getTotalPrice() | currency }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Ação</th>
+        <td class="td-last" mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="onDelete(element)">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </td>
+        <td class="td-hide" mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+.action-container {
+  padding: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mat-form-field {
+  font-size: 1.2rem;
+}
+
+.mat-cell {
+  font-size: 1.2rem;
+}
+
+th.mat-header-cell,
+td {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  height: 400px;
+}
+
+.table-container {
+  overflow: auto;
+  height: 400px;
+}
+
+@media screen and (max-width: 600px) {
+  table {
+    height: unset;
+  }
+
+  tr.mat-row {
+    position: relative;
+  }
+
+  th.mat-header-cell {
+    display: none;
+  }
+
+  .table-container {
+    overflow: unset;
+  }
+
+  td.mat-cell.td-display-none {
+    display: none;
+  }
+
+  td.mat-cell {
+    box-sizing: border-box;
+    display: block;
+    text-align: left;
+    width: 90%;
+    float: left;
+    border: none;
+    padding: 5px;
+  }
+
+  td.mat-footer-cell.td-hide {
+    display: none;
+  }
+
+  td.mat-footer-cell {
+    box-sizing: border-box;
+    display: block;
+    text-align: right;
+    width: 100%;
+    height: 70px;
+    border: none;
+    padding: 20px 90px;
+    background-color: gray;
+  }
+
+  td.mat-footer-cell::before {
+    content: "Total Geral: ";
+  }
+
+  td.mat-cell.lft-align {
+    text-align: right;
+  }
+
+  .value-container {
+    width: 90px;
+    float: right;
+  }
+
+  td.mat-cell.td-full-width {
+    width: 90%;
+  }
+
+  td.mat-cell.td-last {
+    width: 100%;
+    height: 0px;
+    text-align: right;
+    margin-bottom: 30px;
+    border-bottom: 1px solid gray;
+  }
+
+  td.mat-cell.td-last mat-icon {
+    position: relative;
+    bottom: 120px;
+  }
+
+  td.mat-cell::before {
+    content: attr(title);
+    font-weight: 500;
+  }
+
+  td.mat-cell:first-of-type,
+  td.mat-cell:last-of-type {
+    padding: 0;
+  }
+}
