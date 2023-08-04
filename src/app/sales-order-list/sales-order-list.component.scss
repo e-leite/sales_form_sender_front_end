@@ -21,3 +21,54 @@ th.mat-header-cell,
 td {
   text-align: center;
 }
+
+.action-buttons-container {
+  width: 200px;
+}
+
+@media screen and (max-width: 750px) {
+  table {
+    min-width: unset;
+  }
+  th.mat-header-cell {
+    display: none;
+  }
+
+  td.mat-cell {
+    box-sizing: border-box;
+    text-align: left;
+    display: block;
+    float: left;
+    width: 50%;
+    border: none;
+    padding: 7px;
+    color: rgba(0, 0, 0, 0.84);
+  }
+
+  td.td-hidden {
+    display: none;
+  }
+
+  td.td-full {
+    width: 100%;
+  }
+
+  td.mat-cell::before {
+    content: attr(title);
+    color: rgba(0, 0, 0, 0.54);
+    font-weight: 500;
+  }
+
+  td.mat-cell:last-of-type {
+    width: 100%;
+    margin-bottom: 30px;
+    padding: 12px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .action-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
