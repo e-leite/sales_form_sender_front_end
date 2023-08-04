@@ -38,8 +38,8 @@ export class SalesOrderItemListComponent implements OnInit {
 
   getSalesOrderItens(): void {
     this.salesOrderItemListService.get(this.salesOrderId).subscribe((itens) => {
-      this.dataSource.data = itens;
-      // this.dataSource.data = PRODUCT_DATA;
+      // this.dataSource.data = itens;
+      this.dataSource.data = PRODUCT_DATA;
     });
   }
 
